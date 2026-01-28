@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import { useCart } from '@/contexts/CartContext';
@@ -30,6 +30,13 @@ const Checkout = () => {
     country: 'United States',
   });
 
+  // Redirect to cart if empty - using useEffect to avoid render-time navigation
+  useEffect(() => {
+    if (items.length === 0) {
+      navigate('/cart');
+    }
+  }, [items.length, navigate]);
+
   const subtotal = cartTotal;
   const discount = discountAmount > 0 ? (subtotal * discountAmount) / 100 : 0;
   const shipping = deliveryOption === 'express' ? 25 : deliveryCharge;
@@ -48,9 +55,15 @@ const Checkout = () => {
     navigate('/order-confirmation', { state: { orderNumber, total } });
   };
 
+  // Show loading while redirecting if cart is empty
   if (items.length === 0) {
-    navigate('/cart');
-    return null;
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-16 text-center">
+          <p className="text-muted-foreground">Redirecting to cart...</p>
+        </div>
+      </Layout>
+    );
   }
 
   return (
