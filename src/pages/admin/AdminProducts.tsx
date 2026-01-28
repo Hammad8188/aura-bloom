@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { useProducts, useCreateProduct, useUpdateProduct, useDeleteProduct, ProductWithSizes } from '@/hooks/useProducts';
+import { useAdminProducts, useCreateAdminProduct, useUpdateAdminProduct, useDeleteAdminProduct, ProductWithSizes } from '@/hooks/useAdminProducts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -12,10 +12,10 @@ import StockDialogDB from '@/components/admin/StockDialogDB';
 import DeleteConfirmDialog from '@/components/admin/DeleteConfirmDialog';
 
 const AdminProducts = () => {
-  const { data: products, isLoading, error } = useProducts();
-  const createProduct = useCreateProduct();
-  const updateProduct = useUpdateProduct();
-  const deleteProduct = useDeleteProduct();
+  const { data: products, isLoading, error } = useAdminProducts();
+  const createProduct = useCreateAdminProduct();
+  const updateProduct = useUpdateAdminProduct();
+  const deleteProduct = useDeleteAdminProduct();
   
   const [searchQuery, setSearchQuery] = useState('');
   const [productDialogOpen, setProductDialogOpen] = useState(false);
