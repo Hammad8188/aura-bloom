@@ -1,7 +1,8 @@
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { useState } from 'react';
 import { testimonials } from '@/data/products';
 import { Button } from '@/components/ui/button';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,58 +19,65 @@ const Testimonials = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="text-primary text-sm tracking-widest">TESTIMONIALS</span>
           <h2 className="font-serif text-3xl md:text-4xl mt-2 mb-4">What Our Clients Say</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Discover why thousands of customers trust NOIR ESSENCE for their luxury fragrance needs
           </p>
-        </div>
+        </motion.div>
 
         {/* Testimonial Carousel */}
         <div className="relative max-w-4xl mx-auto">
           <div className="overflow-hidden">
-            <div 
-              className="flex transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {testimonials.map((testimonial) => (
-                <div 
-                  key={testimonial.id}
-                  className="w-full flex-shrink-0 px-4"
-                >
-                  <div className="bg-muted/30 p-8 md:p-12 text-center luxury-border">
-                    {/* Stars */}
-                    <div className="flex justify-center gap-1 mb-6">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          className={`h-5 w-5 ${i < testimonial.rating ? 'fill-primary text-primary' : 'text-muted'}`}
-                        />
-                      ))}
-                    </div>
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={currentIndex}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5 }}
+                className="w-full px-4"
+              >
+                <div className="bg-muted/30 p-8 md:p-12 text-center luxury-border relative">
+                  <Quote className="absolute top-6 left-6 h-8 w-8 text-primary/20" />
+                  
+                  {/* Stars */}
+                  <div className="flex justify-center gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <Star 
+                        key={i} 
+                        className={`h-5 w-5 ${i < testimonials[currentIndex].rating ? 'fill-primary text-primary' : 'text-muted'}`}
+                      />
+                    ))}
+                  </div>
 
-                    {/* Quote */}
-                    <blockquote className="font-serif text-xl md:text-2xl italic mb-6 text-foreground/90">
-                      "{testimonial.content}"
-                    </blockquote>
+                  {/* Quote */}
+                  <blockquote className="font-serif text-xl md:text-2xl italic mb-6 text-foreground/90">
+                    "{testimonials[currentIndex].content}"
+                  </blockquote>
 
-                    {/* Product */}
-                    {testimonial.productName && (
-                      <p className="text-sm text-primary mb-4">
-                        Purchased: {testimonial.productName}
-                      </p>
-                    )}
+                  {/* Product */}
+                  {testimonials[currentIndex].productName && (
+                    <p className="text-sm text-primary mb-4">
+                      Purchased: {testimonials[currentIndex].productName}
+                    </p>
+                  )}
 
-                    {/* Author */}
-                    <div>
-                      <p className="font-medium">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.location}</p>
-                    </div>
+                  {/* Author */}
+                  <div>
+                    <p className="font-medium">{testimonials[currentIndex].name}</p>
+                    <p className="text-sm text-muted-foreground">{testimonials[currentIndex].location}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Navigation */}
@@ -108,19 +116,32 @@ const Testimonials = () => {
         </div>
 
         {/* Trust Badges */}
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 mt-16 pt-12 border-t border-primary/10">
+        <motion.div 
+          className="flex flex-wrap justify-center items-center gap-8 md:gap-16 mt-16 pt-12 border-t border-primary/10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           {[
             { number: '10,000+', label: 'Happy Customers' },
             { number: '4.9/5', label: 'Average Rating' },
             { number: '50+', label: 'Countries Shipped' },
             { number: '100%', label: 'Authentic Products' },
           ].map((stat, i) => (
-            <div key={i} className="text-center">
+            <motion.div 
+              key={i} 
+              className="text-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+            >
               <div className="font-serif text-2xl md:text-3xl gold-text-gradient">{stat.number}</div>
               <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
