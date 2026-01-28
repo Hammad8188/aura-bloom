@@ -51,21 +51,8 @@ const Header = () => {
               </SheetContent>
             </Sheet>
 
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.slice(0, 3).map(link => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className="text-sm font-medium tracking-wide hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform hover:after:scale-x-100 hover:after:origin-bottom-left"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-
             {/* Logo */}
-            <Link to="/" className="flex flex-col items-center">
+            <Link to="/" className="flex flex-col items-start">
               <span className="font-serif text-2xl md:text-3xl font-bold tracking-wider">
                 NOIR <span className="gold-text-gradient">ESSENCE</span>
               </span>
@@ -74,9 +61,9 @@ const Header = () => {
               </span>
             </Link>
 
-            {/* Desktop nav right */}
+            {/* Desktop nav - all links on right */}
             <nav className="hidden md:flex items-center gap-8">
-              {navLinks.slice(3).map(link => (
+              {navLinks.map(link => (
                 <Link
                   key={link.name}
                   to={link.path}
