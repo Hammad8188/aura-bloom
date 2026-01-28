@@ -1,36 +1,24 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import { ReactNode } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAdminAuth } from '@/contexts/AdminAuthContext';
 
 interface ProtectedAdminRouteProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const ProtectedAdminRoute = ({ children }: ProtectedAdminRouteProps) => {
-  const { user, isLoading, isAdmin } = useAuth();
-  const location = useLocation();
+  const { isAdmin, isLoading } = useAdminAuth();
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-sidebar">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );
   }
 
-  if (!user) {
-    return <Navigate to="/admin/login" state={{ from: location }} replace />;
-  }
-
   if (!isAdmin) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center space-y-4">
-          <h1 className="font-serif text-2xl">Access Denied</h1>
-          <p className="text-muted-foreground">You don't have permission to access the admin dashboard.</p>
-          <a href="/" className="text-primary hover:underline">Return to Home</a>
-        </div>
-      </div>
-    );
+    return <Navigate to="/admin/login" replace />;
   }
 
   return <>{children}</>;
