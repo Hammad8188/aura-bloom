@@ -1,18 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
+  const { user, isAdmin, isLoading, signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user && isAdmin && !isLoading) {
+      navigate('/admin/dashboard');
+    }
+  }, [user, isAdmin, isLoading, navigate]);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/admin/dashboard');
+    setIsSubmitting(true);
+    const { error } = await signIn(email, password);
+    setIsSubmitting(false);
+    
+    if (!error) {
+      // Auth context will handle redirect once admin status is verified
+    }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-sidebar">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-sidebar p-4">
@@ -22,10 +45,36 @@ const AdminLogin = () => {
           <p className="text-muted-foreground">Admin Dashboard</p>
         </div>
         <form onSubmit={handleLogin} className="space-y-4">
-          <div><Label>Email</Label><Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@noiressence.com" /></div>
-          <div><Label>Password</Label><Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" /></div>
-          <Button type="submit" className="w-full gold-gradient text-primary-foreground">Sign In</Button>
-          <p className="text-center text-xs text-muted-foreground">Demo mode - click Sign In to continue</p>
+          <div className="space-y-2">
+            <Label>Email</Label>
+            <Input 
+              type="email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              placeholder="admin@noiressence.com" 
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>Password</Label>
+            <Input 
+              type="password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              placeholder="••••••••" 
+              required
+            />
+          </div>
+          <Button 
+            type="submit" 
+            className="w-full gold-gradient text-primary-foreground"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Signing In...' : 'Sign In'}
+          </Button>
+          <p className="text-center text-xs text-muted-foreground">
+            Admin access required. Contact support if you need access.
+          </p>
         </form>
       </div>
     </div>
