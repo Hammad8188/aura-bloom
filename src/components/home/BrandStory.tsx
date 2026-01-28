@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 
 const BrandStory = () => {
   return (
@@ -7,53 +8,87 @@ const BrandStory = () => {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Images */}
-          <div className="relative">
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="aspect-[3/4] overflow-hidden">
+                <motion.div 
+                  className="aspect-[3/4] overflow-hidden"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <img
                     src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600"
                     alt="Perfume crafting"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover"
                   />
-                </div>
-                <div className="aspect-square overflow-hidden">
+                </motion.div>
+                <motion.div 
+                  className="aspect-square overflow-hidden"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <img
                     src="https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=600"
                     alt="Luxury ingredients"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover"
                   />
-                </div>
+                </motion.div>
               </div>
               <div className="pt-12 space-y-4">
-                <div className="aspect-square overflow-hidden">
+                <motion.div 
+                  className="aspect-square overflow-hidden"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <img
                     src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=600"
                     alt="Premium bottles"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover"
                   />
-                </div>
-                <div className="aspect-[3/4] overflow-hidden">
+                </motion.div>
+                <motion.div 
+                  className="aspect-[3/4] overflow-hidden"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <img
                     src="https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=600"
                     alt="Fragrance laboratory"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover"
                   />
-                </div>
+                </motion.div>
               </div>
             </div>
 
             {/* Floating Badge */}
-            <div className="absolute -right-4 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground p-6 hidden lg:block">
+            <motion.div 
+              className="absolute -right-4 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground p-6 hidden lg:block"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
               <div className="text-center">
                 <div className="font-serif text-4xl">15+</div>
                 <div className="text-sm">Years of Excellence</div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Content */}
-          <div className="lg:pl-12">
+          <motion.div 
+            className="lg:pl-12"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <span className="text-primary text-sm tracking-widest">OUR STORY</span>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mt-2 mb-6">
               Crafting Excellence Since 2009
@@ -83,17 +118,31 @@ const BrandStory = () => {
                 { title: 'Eco-Conscious', desc: 'Sustainable packaging' },
                 { title: 'Expert Curated', desc: 'Master perfumers\' selection' },
               ].map((feature, i) => (
-                <div key={i} className="border-l-2 border-primary pl-4">
+                <motion.div 
+                  key={i} 
+                  className="border-l-2 border-primary pl-4"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
+                >
                   <h4 className="font-medium text-secondary-foreground">{feature.title}</h4>
                   <p className="text-sm text-secondary-foreground/60">{feature.desc}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            <Button asChild size="lg" className="gold-gradient text-primary-foreground">
-              <Link to="/about">Discover Our Heritage</Link>
-            </Button>
-          </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <Button asChild size="lg" className="gold-gradient text-primary-foreground">
+                <Link to="/about">Discover Our Heritage</Link>
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

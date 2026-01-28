@@ -1,4 +1,13 @@
 import { Product, Testimonial, Review } from '@/types';
+import midnightNoirImg from '@/assets/product-midnight-noir.jpg';
+import goldenElixirImg from '@/assets/product-golden-elixir.jpg';
+import velvetRoseImg from '@/assets/product-velvet-rose.jpg';
+import oceanBreezeImg from '@/assets/product-ocean-breeze.jpg';
+import oudRoyaleImg from '@/assets/product-oud-royale.jpg';
+import jasmineDreamsImg from '@/assets/product-jasmine-dreams.jpg';
+import mysticWoodsImg from '@/assets/product-mystic-woods.jpg';
+import citrusSunriseImg from '@/assets/product-citrus-sunrise.jpg';
+import amberPassionImg from '@/assets/product-amber-passion.jpg';
 
 export const products: Product[] = [
   {
@@ -7,12 +16,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'A captivating journey through the depths of night. Midnight Noir opens with an intoxicating burst of bergamot and black pepper, leading to a heart of dark rose and oud. The base reveals smoky amber, vanilla absolute, and precious sandalwood, creating an unforgettable trail that lingers until dawn.',
     shortDescription: 'An intense, mysterious fragrance for the bold and sophisticated.',
-    images: [
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800',
-    ],
+    images: [midnightNoirImg, midnightNoirImg, midnightNoirImg, midnightNoirImg],
     sizes: [
       { size: '30ml', price: 89, stock: 25 },
       { size: '50ml', price: 139, originalPrice: 159, stock: 18 },
@@ -51,12 +55,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'Inspired by the golden hour, this luxurious elixir captures the warmth of sunlight on precious resins. A sophisticated blend of honey, immortelle, and benzoin creates an aura of opulence and refinement.',
     shortDescription: 'A warm, honeyed fragrance that glows with golden sophistication.',
-    images: [
-      'https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-    ],
+    images: [goldenElixirImg, goldenElixirImg, goldenElixirImg, goldenElixirImg],
     sizes: [
       { size: '30ml', price: 95, stock: 20 },
       { size: '50ml', price: 149, stock: 15 },
@@ -95,12 +94,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'The quintessential rose reimagined with modern elegance. Bulgarian rose absolute meets Turkish rose otto in a velvety embrace, surrounded by raspberry, patchouli, and white musk. A timeless fragrance for the romantic soul.',
     shortDescription: 'A luxurious rose fragrance with velvety depth and romance.',
-    images: [
-      'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-    ],
+    images: [velvetRoseImg, velvetRoseImg, velvetRoseImg, velvetRoseImg],
     sizes: [
       { size: '30ml', price: 79, stock: 30 },
       { size: '50ml', price: 129, stock: 22 },
@@ -139,12 +133,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'Escape to sun-drenched shores with this refreshing aquatic masterpiece. Sea salt mingles with bergamot and green tea, while driftwood and white musk create a sophisticated dry-down that evokes endless summer days.',
     shortDescription: 'A fresh, invigorating scent that captures the essence of the sea.',
-    images: [
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800',
-    ],
+    images: [oceanBreezeImg, oceanBreezeImg, oceanBreezeImg, oceanBreezeImg],
     sizes: [
       { size: '30ml', price: 69, stock: 35 },
       { size: '50ml', price: 109, stock: 28 },
@@ -182,12 +171,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'The king of fragrances for those who command attention. Rare Cambodian oud meets precious Damascus rose, while saffron and amber create an aura of unmatched luxury. A statement fragrance for the distinguished.',
     shortDescription: 'An opulent oud fragrance fit for royalty.',
-    images: [
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-      'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800',
-    ],
+    images: [oudRoyaleImg, oudRoyaleImg, oudRoyaleImg, oudRoyaleImg],
     sizes: [
       { size: '30ml', price: 159, stock: 10 },
       { size: '50ml', price: 249, stock: 8 },
@@ -226,12 +210,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'Awaken your senses with this vibrant citrus celebration. Italian lemon and blood orange dance with grapefruit and neroli, while white tea and musk provide an elegant, lasting foundation.',
     shortDescription: 'A bright, energizing citrus fragrance for the optimist.',
-    images: [
-      'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-    ],
+    images: [citrusSunriseImg, citrusSunriseImg, citrusSunriseImg, citrusSunriseImg],
     sizes: [
       { size: '30ml', price: 59, stock: 40 },
       { size: '50ml', price: 89, stock: 32 },
@@ -269,12 +248,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'Journey into an enchanted forest with this captivating woody fragrance. Rare woods from around the world unite with mystical incense and leather, creating an aura of power and sophistication.',
     shortDescription: 'A deep, mysterious woody fragrance for the explorer.',
-    images: [
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800',
-    ],
+    images: [mysticWoodsImg, mysticWoodsImg, mysticWoodsImg, mysticWoodsImg],
     sizes: [
       { size: '30ml', price: 99, stock: 18 },
       { size: '50ml', price: 159, stock: 14 },
@@ -312,12 +286,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'Surrender to the intoxicating beauty of jasmine at dusk. Indian jasmine sambac weaves with tuberose and orange blossom, while sandalwood and musk create a dreamy, sensual trail.',
     shortDescription: 'A heady, romantic white floral for dreamers.',
-    images: [
-      'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-    ],
+    images: [jasmineDreamsImg, jasmineDreamsImg, jasmineDreamsImg, jasmineDreamsImg],
     sizes: [
       { size: '30ml', price: 85, stock: 22 },
       { size: '50ml', price: 135, stock: 16 },
@@ -356,12 +325,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'Embrace the warmth of ancient amber in this passionate oriental. Rich amber absolute mingles with vanilla, labdanum, and precious woods, creating an irresistible aura of seduction.',
     shortDescription: 'A warm, passionate amber fragrance for the seductive.',
-    images: [
-      'https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-    ],
+    images: [amberPassionImg, amberPassionImg, amberPassionImg, amberPassionImg],
     sizes: [
       { size: '30ml', price: 89, stock: 20 },
       { size: '50ml', price: 139, stock: 16 },
@@ -399,12 +363,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'Experience the purity of freshly laundered linens dried in the summer breeze. Clean musks, white florals, and a touch of aldehydes create an impeccably fresh, sophisticated scent.',
     shortDescription: 'A pristine, clean fragrance for the minimalist.',
-    images: [
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800',
-    ],
+    images: [oceanBreezeImg, oceanBreezeImg, oceanBreezeImg, oceanBreezeImg],
     sizes: [
       { size: '30ml', price: 65, stock: 30 },
       { size: '50ml', price: 99, stock: 25 },
@@ -442,12 +401,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'The essence of luxury automobiles and fine leather goods. Supple leather meets smoky vetiver and dark woods, while saffron and oud add an exotic, opulent dimension.',
     shortDescription: 'A sophisticated leather fragrance for the connoisseur.',
-    images: [
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-      'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800',
-    ],
+    images: [mysticWoodsImg, mysticWoodsImg, mysticWoodsImg, mysticWoodsImg],
     sizes: [
       { size: '30ml', price: 109, stock: 15 },
       { size: '50ml', price: 169, stock: 12 },
@@ -485,12 +439,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'A delicate symphony of peony petals kissed by morning dew. This feminine fragrance captures the ephemeral beauty of a spring garden in full bloom, with soft fruits and creamy musks.',
     shortDescription: 'A delicate, feminine peony fragrance for the romantic.',
-    images: [
-      'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-    ],
+    images: [velvetRoseImg, velvetRoseImg, velvetRoseImg, velvetRoseImg],
     sizes: [
       { size: '30ml', price: 75, stock: 28 },
       { size: '50ml', price: 119, stock: 20 },
@@ -529,12 +478,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'A bold, masculine fragrance that combines the earthiness of vetiver with smoky birch tar. Hints of tobacco and leather add complexity to this sophisticated, modern gentleman scent.',
     shortDescription: 'A bold, smoky fragrance for the modern gentleman.',
-    images: [
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800',
-    ],
+    images: [mysticWoodsImg, mysticWoodsImg, mysticWoodsImg, mysticWoodsImg],
     sizes: [
       { size: '30ml', price: 95, stock: 16 },
       { size: '50ml', price: 149, stock: 12 },
@@ -572,12 +516,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'An exotic journey to tropical paradise. Rare white orchid blooms with coconut and ylang-ylang, while sandalwood and vanilla create a sensual, creamy trail.',
     shortDescription: 'An exotic, tropical floral for the adventurous spirit.',
-    images: [
-      'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-    ],
+    images: [jasmineDreamsImg, jasmineDreamsImg, jasmineDreamsImg, jasmineDreamsImg],
     sizes: [
       { size: '30ml', price: 82, stock: 24 },
       { size: '50ml', price: 129, stock: 18 },
@@ -615,12 +554,7 @@ export const products: Product[] = [
     brand: 'NOIR ESSENCE',
     description: 'Transport yourself to an exotic spice bazaar. Warm cinnamon and cardamom mingle with saffron and cumin, while oud and amber provide a rich, opulent foundation.',
     shortDescription: 'An exotic spice fragrance for the worldly traveler.',
-    images: [
-      'https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=800',
-      'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
-      'https://images.unsplash.com/photo-1592945403244-b3fbabd7f539?w=800',
-      'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800',
-    ],
+    images: [oudRoyaleImg, oudRoyaleImg, oudRoyaleImg, oudRoyaleImg],
     sizes: [
       { size: '30ml', price: 115, stock: 12 },
       { size: '50ml', price: 179, stock: 9 },

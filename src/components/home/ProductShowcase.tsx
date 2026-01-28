@@ -3,6 +3,7 @@ import { products } from '@/data/products';
 import { Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
+import { motion } from 'framer-motion';
 
 const ProductShowcase = () => {
   const { addToWishlist, isInWishlist, addToCart } = useCart();
@@ -12,7 +13,13 @@ const ProductShowcase = () => {
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+        <motion.div 
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <div>
             <span className="text-primary text-sm tracking-widest">OUR COLLECTION</span>
             <h2 className="font-serif text-3xl md:text-4xl mt-2">Signature Fragrances</h2>
@@ -23,15 +30,18 @@ const ProductShowcase = () => {
           >
             View All →
           </Link>
-        </div>
+        </motion.div>
 
         {/* Products Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {featuredProducts.map((product, index) => (
-            <div 
+            <motion.div 
               key={product.id}
-              className="group animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.05}s` }}
+              className="group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="relative overflow-hidden bg-background luxury-border mb-4 hover-lift">
                 {/* Wishlist Button */}
@@ -45,7 +55,7 @@ const ProductShowcase = () => {
                   }}
                 >
                   <Heart 
-                    className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-primary text-primary' : ''}`} 
+                    className={`h-4 w-4 transition-colors ${isInWishlist(product.id) ? 'fill-primary text-primary' : ''}`} 
                   />
                 </Button>
 
@@ -104,7 +114,7 @@ const ProductShowcase = () => {
                   </div>
                 </div>
               </Link>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
