@@ -1,133 +1,91 @@
 import { useState } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { products as initialProducts } from '@/data/products';
+import { useProducts, useCreateProduct, useUpdateProduct, useDeleteProduct, ProductWithSizes } from '@/hooks/useProducts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Product } from '@/types';
-import { Plus, Search, MoreHorizontal, Edit, Trash2, Package } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
-import ProductDialog from '@/components/admin/ProductDialog';
-import StockDialog from '@/components/admin/StockDialog';
+import { Plus, Search, MoreHorizontal, Edit, Trash2, Package, Loader2 } from 'lucide-react';
+import ProductDialogDB from '@/components/admin/ProductDialogDB';
+import StockDialogDB from '@/components/admin/StockDialogDB';
 import DeleteConfirmDialog from '@/components/admin/DeleteConfirmDialog';
 
 const AdminProducts = () => {
-  const { toast } = useToast();
-  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const { data: products, isLoading, error } = useProducts();
+  const createProduct = useCreateProduct();
+  const updateProduct = useUpdateProduct();
+  const deleteProduct = useDeleteProduct();
+  
   const [searchQuery, setSearchQuery] = useState('');
   const [productDialogOpen, setProductDialogOpen] = useState(false);
   const [stockDialogOpen, setStockDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<ProductWithSizes | null>(null);
 
-  const filteredProducts = products.filter(product =>
+  const filteredProducts = products?.filter(product =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.fragranceFamily.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+    product.fragrance_family.toLowerCase().includes(searchQuery.toLowerCase())
+  ) || [];
 
   const handleAddProduct = () => {
     setSelectedProduct(null);
     setProductDialogOpen(true);
   };
 
-  const handleEditProduct = (product: Product) => {
+  const handleEditProduct = (product: ProductWithSizes) => {
     setSelectedProduct(product);
     setProductDialogOpen(true);
   };
 
-  const handleManageStock = (product: Product) => {
+  const handleManageStock = (product: ProductWithSizes) => {
     setSelectedProduct(product);
     setStockDialogOpen(true);
   };
 
-  const handleDeleteClick = (product: Product) => {
+  const handleDeleteClick = (product: ProductWithSizes) => {
     setSelectedProduct(product);
     setDeleteDialogOpen(true);
   };
 
-  const handleSaveProduct = (productData: Partial<Product>) => {
-    if (selectedProduct) {
-      // Update existing product
-      setProducts(prev =>
-        prev.map(p => (p.id === selectedProduct.id ? { ...p, ...productData } as Product : p))
-      );
-      toast({
-        title: 'Product Updated',
-        description: `${productData.name} has been updated successfully.`,
-      });
-    } else {
-      // Add new product
-      const newProduct: Product = {
-        ...productData,
-        id: Date.now().toString(),
-        brand: 'NOIR ESSENCE',
-        images: ['/placeholder.svg'],
-        occasion: ['day'],
-        fragrancePyramid: {
-          top: [{ name: 'Top Note', description: 'Opening' }],
-          heart: [{ name: 'Heart Note', description: 'Middle' }],
-          base: [{ name: 'Base Note', description: 'Foundation' }],
-        },
-        longevity: 7,
-        sillage: 6,
-        rating: 0,
-        reviewCount: 0,
-        createdAt: new Date().toISOString().split('T')[0],
-      } as Product;
-      setProducts(prev => [newProduct, ...prev]);
-      toast({
-        title: 'Product Added',
-        description: `${productData.name} has been added successfully.`,
-      });
-    }
-  };
-
-  const handleUpdateStock = (productId: string, sizes: { size: string; stock: number }[]) => {
-    setProducts(prev =>
-      prev.map(p => {
-        if (p.id === productId) {
-          return {
-            ...p,
-            sizes: p.sizes.map(s => {
-              const updated = sizes.find(us => us.size === s.size);
-              return updated ? { ...s, stock: updated.stock } : s;
-            }),
-          };
-        }
-        return p;
-      })
-    );
-    toast({
-      title: 'Stock Updated',
-      description: 'Product stock has been updated successfully.',
-    });
-  };
-
   const handleDeleteProduct = () => {
     if (selectedProduct) {
-      setProducts(prev => prev.filter(p => p.id !== selectedProduct.id));
-      toast({
-        title: 'Product Deleted',
-        description: `${selectedProduct.name} has been removed.`,
-        variant: 'destructive',
-      });
+      deleteProduct.mutate(selectedProduct.id);
       setDeleteDialogOpen(false);
       setSelectedProduct(null);
     }
   };
 
-  const getTotalStock = (product: Product) => {
-    return product.sizes.reduce((sum, size) => sum + size.stock, 0);
+  const getTotalStock = (product: ProductWithSizes) => {
+    return product.product_sizes.reduce((sum, size) => sum + size.stock, 0);
   };
 
-  const getStockStatus = (product: Product) => {
+  const getStockStatus = (product: ProductWithSizes) => {
     const total = getTotalStock(product);
     if (total === 0) return { label: 'Out of Stock', variant: 'destructive' as const };
     if (total < 10) return { label: 'Low Stock', variant: 'secondary' as const };
     return { label: 'In Stock', variant: 'default' as const };
   };
+
+  if (isLoading) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center h-64">
+          <Loader2 className="h-8 w-8 animate-spin" />
+        </div>
+      </AdminLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <AdminLayout>
+        <div className="text-center py-12">
+          <p className="text-destructive">Error loading products</p>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
@@ -149,48 +107,49 @@ const AdminProducts = () => {
         </div>
       </div>
 
-      <div className="bg-card rounded-lg border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Product</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Price Range</TableHead>
-              <TableHead>Total Stock</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="w-16">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredProducts.length === 0 ? (
+      {filteredProducts.length === 0 ? (
+        <div className="text-center py-12 bg-card rounded-lg border">
+          <p className="text-muted-foreground">
+            {searchQuery ? 'No products found' : 'No products yet. Add your first product!'}
+          </p>
+        </div>
+      ) : (
+        <div className="bg-card rounded-lg border">
+          <Table>
+            <TableHeader>
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                  No products found
-                </TableCell>
+                <TableHead>Product</TableHead>
+                <TableHead>Category</TableHead>
+                <TableHead>Price Range</TableHead>
+                <TableHead>Total Stock</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="w-16">Actions</TableHead>
               </TableRow>
-            ) : (
-              filteredProducts.map((product) => {
+            </TableHeader>
+            <TableBody>
+              {filteredProducts.map((product) => {
                 const status = getStockStatus(product);
-                const priceRange = product.sizes.length > 1
-                  ? `$${Math.min(...product.sizes.map(s => s.price))} - $${Math.max(...product.sizes.map(s => s.price))}`
-                  : `$${product.sizes[0].price}`;
+                const prices = product.product_sizes.map(s => Number(s.price));
+                const priceRange = prices.length > 1
+                  ? `$${Math.min(...prices)} - $${Math.max(...prices)}`
+                  : prices.length === 1 ? `$${prices[0]}` : 'N/A';
 
                 return (
                   <TableRow key={product.id}>
                     <TableCell>
                       <div className="flex items-center gap-3">
                         <img
-                          src={product.images[0]}
+                          src={product.image_url || '/placeholder.svg'}
                           alt={product.name}
                           className="w-12 h-12 object-cover rounded"
                         />
                         <div>
                           <p className="font-medium">{product.name}</p>
-                          <p className="text-xs text-muted-foreground">{product.gender}</p>
+                          <p className="text-xs text-muted-foreground capitalize">{product.gender}</p>
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="capitalize">{product.fragranceFamily}</TableCell>
+                    <TableCell className="capitalize">{product.fragrance_family}</TableCell>
                     <TableCell>{priceRange}</TableCell>
                     <TableCell>{getTotalStock(product)}</TableCell>
                     <TableCell>
@@ -221,24 +180,25 @@ const AdminProducts = () => {
                     </TableCell>
                   </TableRow>
                 );
-              })
-            )}
-          </TableBody>
-        </Table>
-      </div>
+              })}
+            </TableBody>
+          </Table>
+        </div>
+      )}
 
-      <ProductDialog
+      <ProductDialogDB
         open={productDialogOpen}
         onOpenChange={setProductDialogOpen}
         product={selectedProduct}
-        onSave={handleSaveProduct}
+        onCreate={createProduct.mutate}
+        onUpdate={updateProduct.mutate}
+        isLoading={createProduct.isPending || updateProduct.isPending}
       />
 
-      <StockDialog
+      <StockDialogDB
         open={stockDialogOpen}
         onOpenChange={setStockDialogOpen}
         product={selectedProduct}
-        onSave={handleUpdateStock}
       />
 
       <DeleteConfirmDialog
