@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Search, ShoppingBag, Heart, Menu, X, User } from 'lucide-react';
+import { Search, ShoppingBag, Heart, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -12,8 +12,7 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Shop', path: '/shop' },
-    { name: 'Collections', path: '/shop?collection=all' },
+    { name: 'Collection', path: '/shop' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -84,12 +83,6 @@ const Header = () => {
               >
                 {isSearchOpen ? <X className="h-5 w-5" /> : <Search className="h-5 w-5" />}
               </Button>
-
-              <Link to="/account">
-                <Button variant="ghost" size="icon" className="hover:text-primary hidden md:flex">
-                  <User className="h-5 w-5" />
-                </Button>
-              </Link>
 
               <Link to="/wishlist" className="relative">
                 <Button variant="ghost" size="icon" className="hover:text-primary">

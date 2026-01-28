@@ -1,22 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAdminAuth } from '@/contexts/AdminAuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const { user, isAdmin, isLoading, signIn } = useAuth();
+  const { isAdmin, isLoading, signIn } = useAdminAuth();
+  const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (user && isAdmin && !isLoading) {
+    if (isAdmin && !isLoading) {
       navigate('/admin/dashboard');
     }
-  }, [user, isAdmin, isLoading, navigate]);
+  }, [isAdmin, isLoading, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,8 +26,18 @@ const AdminLogin = () => {
     const { error } = await signIn(email, password);
     setIsSubmitting(false);
     
-    if (!error) {
-      // Auth context will handle redirect once admin status is verified
+    if (error) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Invalid credentials',
+        variant: 'destructive',
+      });
+    } else {
+      toast({
+        title: 'Welcome',
+        description: 'Successfully signed in to admin dashboard',
+      });
+      navigate('/admin/dashboard');
     }
   };
 
@@ -72,9 +84,6 @@ const AdminLogin = () => {
           >
             {isSubmitting ? 'Signing In...' : 'Sign In'}
           </Button>
-          <p className="text-center text-xs text-muted-foreground">
-            Admin access required. Contact support if you need access.
-          </p>
         </form>
       </div>
     </div>
