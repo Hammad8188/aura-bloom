@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Product, FragranceFamily, Gender } from '@/types';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, Upload, X } from 'lucide-react';
 
 interface ProductDialogProps {
   open: boolean;
@@ -16,6 +16,8 @@ interface ProductDialogProps {
 }
 
 const ProductDialog = ({ open, onOpenChange, product, onSave }: ProductDialogProps) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     shortDescription: '',
@@ -23,6 +25,7 @@ const ProductDialog = ({ open, onOpenChange, product, onSave }: ProductDialogPro
     fragranceFamily: 'oriental' as FragranceFamily,
     gender: 'unisex' as Gender,
     sizes: [{ size: '30ml', price: 0, stock: 0 }],
+    image: '',
   });
 
   useEffect(() => {
@@ -34,7 +37,9 @@ const ProductDialog = ({ open, onOpenChange, product, onSave }: ProductDialogPro
         fragranceFamily: product.fragranceFamily,
         gender: product.gender,
         sizes: product.sizes.map(s => ({ size: s.size, price: s.price, stock: s.stock })),
+        image: product.images[0] || '',
       });
+      setImagePreview(product.images[0] || null);
     } else {
       setFormData({
         name: '',
@@ -43,17 +48,41 @@ const ProductDialog = ({ open, onOpenChange, product, onSave }: ProductDialogPro
         fragranceFamily: 'oriental' as FragranceFamily,
         gender: 'unisex' as Gender,
         sizes: [{ size: '30ml', price: 0, stock: 0 }],
+        image: '',
       });
+      setImagePreview(null);
     }
   }, [product, open]);
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        setImagePreview(result);
+        setFormData({ ...formData, image: result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setImagePreview(null);
+    setFormData({ ...formData, image: '' });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const images = formData.image ? [formData.image] : (product?.images || []);
     onSave({
       ...formData,
       id: product?.id || Date.now().toString(),
       brand: 'NOIR ESSENCE',
-      images: product?.images || [],
+      images,
       rating: product?.rating || 0,
       reviewCount: product?.reviewCount || 0,
       createdAt: product?.createdAt || new Date().toISOString().split('T')[0],
@@ -92,6 +121,46 @@ const ProductDialog = ({ open, onOpenChange, product, onSave }: ProductDialogPro
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Image Upload */}
+          <div>
+            <Label>Product Image</Label>
+            <div className="mt-2">
+              {imagePreview ? (
+                <div className="relative w-32 h-32 rounded-lg overflow-hidden border border-border">
+                  <img
+                    src={imagePreview}
+                    alt="Product preview"
+                    className="w-full h-full object-cover"
+                  />
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="icon"
+                    className="absolute top-1 right-1 h-6 w-6"
+                    onClick={removeImage}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              ) : (
+                <div
+                  className="w-32 h-32 border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-primary transition-colors"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Upload className="h-8 w-8 text-muted-foreground mb-2" />
+                  <span className="text-xs text-muted-foreground">Upload Image</span>
+                </div>
+              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+              />
+            </div>
+          </div>
+
           <div>
             <Label htmlFor="name">Product Name</Label>
             <Input
