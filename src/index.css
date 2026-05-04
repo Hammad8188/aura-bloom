@@ -112,6 +112,111 @@
   .glass {
     @apply backdrop-blur-xl bg-background/60 border border-border/50;
   }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(hsl(var(--primary) / 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.08) 1px, transparent 1px),
+      linear-gradient(120deg, transparent 0%, hsl(190 80% 60% / 0.08) 42%, transparent 70%);
+    background-size: 54px 54px, 54px 54px, 100% 100%;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 78%, transparent 100%);
+    animation: gridPan 18s linear infinite;
+  }
+
+  .hero-scanline {
+    position: absolute;
+    width: 45%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.75), transparent);
+    box-shadow: 0 0 28px hsl(var(--primary) / 0.35);
+  }
+
+  .hero-photo-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 1px solid hsl(var(--primary) / 0.28);
+    border-radius: 0.5rem;
+    background: hsl(var(--card));
+    box-shadow: 0 30px 90px -36px hsl(var(--primary) / 0.7);
+  }
+
+  .hero-photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    z-index: 2;
+    border: 1px solid hsl(0 0% 100% / 0.12);
+    border-radius: 0.35rem;
+    pointer-events: none;
+  }
+
+  .hero-image-sheen {
+    position: absolute;
+    inset: -20%;
+    z-index: 1;
+    background: linear-gradient(115deg, transparent 35%, hsl(0 0% 100% / 0.12) 48%, transparent 61%);
+    transform: translateX(-70%);
+    animation: imageSheen 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .hero-code-card {
+    position: absolute;
+    z-index: 3;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 150px;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid hsl(var(--border) / 0.7);
+    border-radius: 0.5rem;
+    background: hsl(var(--background) / 0.82);
+    box-shadow: 0 20px 54px -24px hsl(var(--primary) / 0.55);
+    backdrop-filter: blur(16px);
+  }
+
+  .hero-code-card span {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .hero-code-card strong {
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  .hero-code-card small {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.68rem;
+    line-height: 1.2;
+  }
+
+  .hero-metric-pill {
+    display: grid;
+    min-height: 86px;
+    align-content: center;
+    gap: 0.25rem;
+    border: 1px solid hsl(var(--border) / 0.75);
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, hsl(var(--card) / 0.88), hsl(var(--secondary) / 0.68));
+    padding: 1rem;
+    text-align: center;
+    backdrop-filter: blur(12px);
+  }
+
+  .hero-metric-pill strong {
+    color: hsl(var(--primary));
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.45rem;
+    line-height: 1;
+  }
+
+  .hero-metric-pill span {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.78rem;
+  }
 }
 
 @layer utilities {
@@ -153,12 +258,32 @@
   50% { box-shadow: 0 0 40px -5px hsla(174, 72%, 45%, 0.5); }
 }
 
+@keyframes gridPan {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to { background-position: 54px 54px, 54px 54px, 0 0; }
+}
+
+@keyframes imageSheen {
+  0%, 35% { transform: translateX(-70%); opacity: 0; }
+  50% { opacity: 1; }
+  75%, 100% { transform: translateX(70%); opacity: 0; }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 /* Custom scrollbar */

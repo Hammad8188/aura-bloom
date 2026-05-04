@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import {
-  Code2, Blocks, Server, Mail, Phone, MapPin, Github, Linkedin, ChevronDown, Cpu, Globe, Shield, Database, Terminal, FileCode, Vote, ShoppingCart, Award, GraduationCap, Languages, Sparkles
+  Code2, Blocks, Server, Mail, Phone, MapPin, Github, Linkedin, ChevronDown, Cpu, Globe, Shield, Database, Terminal, FileCode, Vote, ShoppingCart, Award, GraduationCap, Languages, Sparkles, ArrowRight
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -155,9 +155,20 @@ const contact = {
   location: "Islamabad, Pakistan"
 };
 
+const heroImageUrl =
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80";
+
+const heroStats = [
+  { value: "6+", label: "Smart contracts" },
+  { value: "3+", label: "REST APIs" },
+  { value: "90%+", label: "Test coverage" }
+];
+
+const heroTechStack = ["Solidity", "Node.js", "Express", "MongoDB", "Web3"];
+
 /* ─────────────── ANIMATION VARIANTS ─────────────── */
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
@@ -166,7 +177,7 @@ const fadeInUp = {
   })
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -174,7 +185,7 @@ const staggerContainer = {
   }
 };
 
-const itemFadeIn = {
+const itemFadeIn: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
 };
@@ -194,33 +205,89 @@ function SectionTitle({ children, icon: Icon }: { children: React.ReactNode; ico
   );
 }
 
-function FloatingOrbs() {
+function HeroBackdrop() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(6)].map((_, i) => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div className="hero-grid" />
+      <motion.div
+        className="hero-scanline top-28"
+        animate={{ x: ["-30%", "120%"] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="hero-scanline bottom-32 opacity-40"
+        animate={{ x: ["120%", "-30%"] }}
+        transition={{ duration: 11, repeat: Infinity, ease: "linear" }}
+      />
+      <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-background via-background/70 to-transparent" />
+    </div>
+  );
+}
+
+function HeroVisual() {
+  const floatingCards = [
+    { icon: Shield, title: "Secure", detail: "Audited flows", className: "-left-3 top-12" },
+    { icon: Database, title: "Backend", detail: "API ready", className: "-right-2 top-1/2" },
+    { icon: Blocks, title: "Web3", detail: "On-chain logic", className: "left-8 -bottom-5" }
+  ];
+
+  return (
+    <motion.div
+      className="relative mx-auto mt-12 w-full max-w-[500px] lg:mt-0 lg:ml-auto"
+      initial={{ opacity: 0, x: 40, rotate: 1 }}
+      animate={{ opacity: 1, x: 0, rotate: 0 }}
+      transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
+    >
+      <motion.figure
+        className="hero-photo-frame"
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <img
+          src={heroImageUrl}
+          alt="Developer workstation with code on a laptop screen"
+          className="h-full w-full object-cover"
+        />
+        <div className="hero-image-sheen" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-primary/10" />
+        <div className="absolute bottom-4 left-4 right-4 rounded-lg border border-white/10 bg-background/75 p-4 shadow-2xl backdrop-blur-md">
+          <div className="mb-3 flex items-center gap-2 text-primary">
+            <Terminal className="h-4 w-4" />
+            <span className="text-xs font-semibold uppercase">deploy.log</span>
+          </div>
+          <div className="space-y-2 font-mono text-xs text-muted-foreground">
+            <p><span className="text-primary">status</span> contracts verified</p>
+            <p><span className="text-primary">api</span> latency below 500ms</p>
+            <p><span className="text-primary">chain</span> data integrity enabled</p>
+          </div>
+        </div>
+      </motion.figure>
+
+      {floatingCards.map((card, index) => (
         <motion.div
-          key={i}
-          className="absolute rounded-full bg-primary/10 blur-3xl"
-          style={{
-            width: 200 + i * 80,
-            height: 200 + i * 80,
-            left: `${10 + i * 15}%`,
-            top: `${5 + i * 12}%`
-          }}
+          key={card.title}
+          className={`hero-code-card hidden sm:flex ${card.className}`}
+          initial={{ opacity: 0, y: 16, scale: 0.92 }}
           animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -30, 20, 0],
-            scale: [1, 1.1, 0.95, 1]
+            opacity: 1,
+            y: [0, index % 2 === 0 ? -8 : 8, 0],
+            scale: 1
           }}
           transition={{
-            duration: 8 + i * 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.5
+            opacity: { duration: 0.4, delay: 0.9 + index * 0.12 },
+            scale: { duration: 0.4, delay: 0.9 + index * 0.12 },
+            y: { duration: 4 + index, repeat: Infinity, ease: "easeInOut" }
           }}
-        />
+        >
+          <card.icon className="h-4 w-4 text-primary" />
+          <span>
+            <strong>{card.title}</strong>
+            <small>{card.detail}</small>
+          </span>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }
 
@@ -279,72 +346,104 @@ export default function App() {
       </motion.nav>
 
       {/* ─── HERO ─── */}
-      <section id="hero" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <FloatingOrbs />
+      <section id="hero" ref={heroRef} className="relative min-h-screen overflow-hidden px-4 pb-20 pt-28 md:pt-32">
+        <HeroBackdrop />
 
         <motion.div
-          className="relative z-10 text-center max-w-4xl mx-auto px-4"
+          className="relative z-10 mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]"
           style={{ opacity: heroOpacity, scale: heroScale }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline" className="mb-6 px-4 py-1.5 text-sm font-medium border-primary/30 text-primary bg-primary/5">
-              <Sparkles className="w-3.5 h-3.5 mr-1.5" />
-              Available for hire
-            </Badge>
-          </motion.div>
+          <div className="text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Badge variant="outline" className="mb-6 px-4 py-1.5 text-sm font-medium border-primary/30 text-primary bg-primary/5 backdrop-blur">
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                Available for hire
+              </Badge>
+            </motion.div>
 
-          <motion.h1
-            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-          >
-            <span className="gradient-text">Hammad</span> Khan
-          </motion.h1>
+            <motion.h1
+              className="mb-5 text-4xl font-bold leading-tight md:text-6xl lg:text-7xl"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+            >
+              Building secure Web3 systems with
+              <span className="gradient-text"> production-grade backend logic</span>
+            </motion.h1>
 
-          <motion.p
-            className="text-lg md:text-xl text-muted-foreground mb-2 font-medium"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Blockchain Developer &nbsp;|&nbsp; Smart Contract Engineer &nbsp;|&nbsp; Backend Developer
-          </motion.p>
+            <motion.p
+              className="mb-4 text-lg font-medium text-foreground/90 md:text-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Blockchain Developer | Smart Contract Engineer | Backend Developer
+            </motion.p>
 
-          <motion.p
-            className="text-muted-foreground/80 max-w-2xl mx-auto mb-8 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            Building secure, scalable decentralised applications and robust backend systems.
-            Passionate about Web3, smart contracts, and delivering production-grade solutions.
-          </motion.p>
+            <motion.p
+              className="mx-auto mb-8 max-w-2xl text-muted-foreground/85 leading-relaxed lg:mx-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              I design Solidity contracts, role-based APIs, and scalable Node.js services that move from prototype to production with clear architecture and strong reliability.
+            </motion.p>
 
-          <motion.div
-            className="flex flex-wrap items-center justify-center gap-3"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <Button onClick={() => scrollTo("projects")} className="bg-primary text-primary-foreground hover:bg-primary/90 glow">
-              View Projects
-            </Button>
-            <Button variant="outline" onClick={() => scrollTo("contact")} className="border-primary/30 hover:bg-primary/10 hover:text-primary">
-              <Mail className="w-4 h-4 mr-2" />
-              Contact Me
-            </Button>
-            <Button variant="ghost" className="text-muted-foreground hover:text-primary" asChild>
-              <a href={`https://${contact.github}`} target="_blank" rel="noopener noreferrer">
-                <Github className="w-4 h-4 mr-2" />
-                GitHub
-              </a>
-            </Button>
-          </motion.div>
+            <motion.div
+              className="mb-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Button onClick={() => scrollTo("projects")} className="bg-primary text-primary-foreground hover:bg-primary/90 glow group">
+                View Projects
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+              <Button variant="outline" onClick={() => scrollTo("contact")} className="border-primary/30 hover:bg-primary/10 hover:text-primary">
+                <Mail className="w-4 h-4 mr-2" />
+                Contact Me
+              </Button>
+              <Button variant="ghost" className="text-muted-foreground hover:text-primary" asChild>
+                <a href={`https://${contact.github}`} target="_blank" rel="noopener noreferrer">
+                  <Github className="w-4 h-4 mr-2" />
+                  GitHub
+                </a>
+              </Button>
+            </motion.div>
+
+            <motion.div
+              className="grid grid-cols-1 gap-3 sm:grid-cols-3"
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+            >
+              {heroStats.map((stat) => (
+                <motion.div key={stat.label} className="hero-metric-pill" variants={itemFadeIn}>
+                  <strong>{stat.value}</strong>
+                  <span>{stat.label}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.75 }}
+            >
+              {heroTechStack.map((tech) => (
+                <Badge key={tech} variant="secondary" className="bg-secondary/70 text-foreground/85 border border-border/40">
+                  {tech}
+                </Badge>
+              ))}
+            </motion.div>
+          </div>
+
+          <HeroVisual />
         </motion.div>
 
         <motion.div
