@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import {
-  Code2, Blocks, Server, Mail, Phone, MapPin, Github, Linkedin, ChevronDown, Cpu, Globe, Shield, Database, Terminal, FileCode, Vote, ShoppingCart, Award, GraduationCap, Languages, Sparkles, ArrowRight
+  Code2, Globe, Mail, Phone, MapPin, Linkedin, ChevronDown, Monitor, Smartphone, ExternalLink, Layers, Brush, FileText, ShoppingCart, Award, GraduationCap, Sparkles, ArrowRight, BadgeCheck, Terminal
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,146 +12,149 @@ import { Separator } from "@/components/ui/separator";
 
 const experiences = [
   {
-    role: "Backend Developer",
-    company: "SAT Software House",
+    role: "Web Developer",
+    company: "SAT Software House and Institute",
     location: "Swabi, Pakistan",
-    period: "Nov 2025 – Present",
-    icon: Server,
+    period: "Oct 2025 – Present",
+    icon: Globe,
     points: [
-      "Architected backend services in Node.js & Express.js supporting 3 role-based modules for the HIRE Expert platform.",
-      "Engineered modular REST APIs with JWT auth and RBAC, maintaining 100% uptime across all integrations.",
-      "Structured MongoDB schemas and middleware, reducing API response errors by 40%.",
-      "Collaborated with frontend teams to define API contracts and accelerate feature delivery by 30%."
+      "Develop responsive and user-friendly web interfaces using HTML, CSS, and JavaScript.",
+      "Build, customize, and maintain WordPress websites, themes, and plugins.",
+      "Use Elementor and other page builders to design visually appealing layouts.",
+      "Convert UI/UX designs into fully functional web pages.",
+      "Optimize website performance, loading speed, and SEO structure.",
+      "Ensure cross-browser and cross-device compatibility.",
+      "Troubleshoot and fix bugs, errors, and layout issues.",
+      "Perform regular website maintenance, security updates, and backups."
     ]
   },
   {
-    role: "Blockchain Developer Intern",
-    company: "Octaloop Technologies",
-    location: "Lahore, Pakistan",
-    period: "Jun 2024 – Aug 2024",
-    icon: Blocks,
+    role: "Internee – PSEB IT Industry Internship",
+    company: "Pakistan Software Export Board (PSEB) – SAT Impact Solutions",
+    location: "Swabi, Pakistan",
+    period: "Oct 2025 – Present",
+    icon: Award,
     points: [
-      "Developed and deployed 4 Solidity smart contracts on Ethereum testnets covering token, escrow, and voting use cases.",
-      "Co-built 2 internal blockchain tools integrating ethers.js and Web3.js with Node.js backends.",
-      "Authored and validated Solidity contracts in Hardhat; reduced bugs by 50% via Mocha & Chai unit tests."
+      "Selected for a competitive national IT internship program.",
+      "Completed a structured 6-month internship in a software/IT environment.",
+      "Gained hands-on experience in web development, software tools, and workplace processes."
     ]
   }
 ];
 
 const projects = [
   {
-    name: "Qryptum Blockchain",
-    tagline: "Proof of Data (PoD) Consensus",
-    period: "Jan 2024 – May 2024",
-    icon: Cpu,
-    tech: ["Solidity", "Lattice Cryptography", "AI Validation", "DRC-20", "Node.js"],
+    name: "Khor Khuwair Pest Control Website",
+    tagline: "Business Website with WhatsApp Integration",
+    period: "2025",
+    icon: Globe,
+    tech: ["WordPress", "Elementor", "HTML", "CSS", "WhatsApp API"],
     points: [
-      "Designed a next-gen blockchain with a novel PoD consensus, processing verification 3x faster than PoW.",
-      "Engineered quantum-resistant security via lattice-based cryptographic primitives.",
-      "Introduced DRC-20 Data Contracts enabling 100% on-chain data integrity with AI-driven validation."
+      "Designed and developed a responsive business website using WordPress and Elementor.",
+      "Implemented custom HTML/CSS for UI enhancement and layout customization.",
+      "Integrated WhatsApp API/Chat feature to improve customer communication.",
+      "Structured service pages with clear navigation for improved User Experience (UX).",
+      "Optimized for mobile responsiveness, accessibility, and performance."
     ]
   },
   {
-    name: "NFT Marketplace",
-    tagline: "Auction & Direct Sales Platform",
-    period: "Oct 2023 – Dec 2023",
+    name: "ClenchX Sports E-commerce Website",
+    tagline: "WooCommerce Sports Store",
+    period: "2025",
     icon: ShoppingCart,
-    tech: ["Solidity", "ERC-721", "ethers.js", "Node.js", "Express.js", "MetaMask"],
+    tech: ["WordPress", "WooCommerce", "Elementor", "Responsive Design"],
     points: [
-      "Built a decentralised NFT marketplace supporting auction and direct sales with 50+ concurrent listings.",
-      "Streamlined ownership transfers via gas-optimised ERC-721 contracts, cutting costs by 25%.",
-      "Delivered a React.js frontend with MetaMask integration, reducing onboarding to under 2 minutes."
+      "Built an e-commerce platform using WordPress (WooCommerce) and Elementor.",
+      "Designed structured product pages, categories, and navigation system.",
+      "Applied responsive design principles for seamless mobile experience.",
+      "Enhanced UI using custom styling and layout improvements.",
+      "Improved user journey for product browsing and interaction."
     ]
   },
   {
-    name: "Escrow Marketplace",
-    tagline: "Decentralised Escrow Smart Contracts",
-    period: "Aug 2023 – Sep 2023",
-    icon: Shield,
-    tech: ["Solidity", "Hardhat", "JavaScript", "Node.js", "Mocha", "Chai"],
+    name: "Jamal Medical Center Website",
+    tagline: "Healthcare Website",
+    period: "2025",
+    icon: Monitor,
+    tech: ["WordPress", "Responsive Design", "Accessibility"],
     points: [
-      "Deployed a trustless P2P escrow marketplace with zero intermediaries for buyers and sellers.",
-      "Developed on-chain dispute-safe fund-release flows covering 5 edge-case scenarios.",
-      "Wrote 15+ Hardhat deployment scripts and unit tests achieving 90%+ code coverage."
+      "Designed and developed a healthcare website using WordPress.",
+      "Structured pages for medical services, departments, and contact information.",
+      "Created a clean and accessible layout for improved patient usability.",
+      "Ensured responsive design across all devices.",
+      "Focused on readability, accessibility, and clear information delivery."
     ]
   },
   {
-    name: "Decentralised Voting System",
-    tagline: "Final Year Project",
-    period: "Jan 2024 – Jun 2024",
-    icon: Vote,
-    tech: ["Solidity", "Web3.js", "React.js", "Truffle", "Ganache", "Node.js"],
+    name: "Ideal Tech Hub E-commerce Website",
+    tagline: "Electronics E-commerce Store",
+    period: "2025",
+    icon: ShoppingCart,
+    tech: ["WordPress", "WooCommerce", "Custom Layouts", "UI Enhancements"],
     points: [
-      "Designed a tamper-proof voting system on Ethereum registering 100+ test voters with zero discrepancies.",
-      "Smart contracts manage voter registration, ballot casting, and automated tallying across 3 categories.",
-      "Built a React.js & Web3.js frontend delivering real-time updates with <500ms latency."
+      "Developed a responsive e-commerce website using WordPress and WooCommerce.",
+      "Created organized product listings for electronics and computer accessories.",
+      "Implemented custom layouts and UI enhancements.",
+      "Ensured mobile optimization and smooth navigation.",
+      "Focused on usability, performance, and a user-friendly shopping experience."
     ]
   },
   {
-    name: "ERC-20 Token Contract",
-    tagline: "Custom Token with Advanced Features",
-    period: "Jul 2023 – Aug 2023",
-    icon: FileCode,
-    tech: ["Solidity", "OpenZeppelin", "Hardhat"],
+    name: "The Home Techie Website",
+    tagline: "Service Presentation Website",
+    period: "2025",
+    icon: Layers,
+    tech: ["WordPress", "Elementor", "CSS", "Performance"],
     points: [
-      "Deployed a production-ready ERC-20 token with minting, burning, and pausable functionality.",
-      "Extended OpenZeppelin with 3 custom access roles and enforced RBAC through 10+ test scenarios."
-    ]
-  },
-  {
-    name: "BSC Smart Contract Dashboard",
-    tagline: "Blockchain & REST API Integration",
-    period: "May 2023 – Jun 2023",
-    icon: Database,
-    tech: ["Node.js", "Express.js", "ethers.js", "BscScan API"],
-    points: [
-      "Built a REST API fetching live smart contract deployment data from BSC, processing 200+ calls/session.",
-      "Engineered error handling and rate-limit management, reducing failed requests by 60%."
+      "Developed a modern website using WordPress and Elementor.",
+      "Designed an intuitive and clean UI/UX for effective service presentation.",
+      "Customized layouts using Elementor and CSS.",
+      "Ensured cross-browser and cross-device compatibility.",
+      "Focused on performance optimization and fast loading speed."
     ]
   }
 ];
 
 const skillCategories = [
   {
-    title: "Blockchain",
-    icon: Blocks,
-    skills: ["Solidity", "Smart Contracts", "Ethereum", "BSC", "ERC-20", "ERC-721", "DeFi", "NFT", "OpenZeppelin", "ethers.js", "Web3.js", "Hardhat", "Truffle", "Ganache", "MetaMask"]
-  },
-  {
-    title: "Backend",
-    icon: Server,
-    skills: ["Node.js", "Express.js", "REST API", "MongoDB", "Mongoose", "JWT Auth", "RBAC", "Middleware"]
-  },
-  {
-    title: "Frontend",
+    title: "Frontend Development",
     icon: Code2,
-    skills: ["React.js", "HTML", "CSS", "JavaScript", "TypeScript", "Tailwind CSS"]
+    skills: ["HTML5", "CSS3", "JavaScript", "React.js", "Responsive Design", "Cross-Browser Compatibility"]
   },
   {
-    title: "Tools & Testing",
-    icon: Terminal,
-    skills: ["Git", "GitHub", "Postman", "Mocha", "Chai", "VS Code", "npm", "Hardhat"]
+    title: "CMS & Page Builders",
+    icon: Globe,
+    skills: ["WordPress", "Elementor", "WooCommerce", "Theme Customization", "Plugin Management", "Page Builders"]
+  },
+  {
+    title: "Design & Tools",
+    icon: Brush,
+    skills: ["VS Code", "Canva", "Figma", "UI/UX Design", "SEO", "Performance Optimization"]
+  },
+  {
+    title: "Office & Productivity",
+    icon: FileText,
+    skills: ["Microsoft Excel", "Microsoft Word", "Microsoft PowerPoint", "Git", "GitHub"]
   }
 ];
 
 const education = {
-  degree: "Bachelor of Science in Software Engineering",
-  school: "Islamia College University, Peshawar",
-  period: "Sep 2020 – Aug 2024",
-  coursework: "Data Structures & Algorithms, Cryptography, Distributed Systems, Database Systems, Web Engineering, OOP, Software Project Management"
+  degree: "Bachelor of Computer Science (Software)",
+  school: "Abdul Wali Khan University Mardan",
+  period: "Sep 2020 – Jul 2024",
+  coursework: "Software and applications development and analysis, EQF Level 6"
 };
 
 const languages = [
-  { name: "English", level: "Professional Working Proficiency" },
-  { name: "Urdu", level: "Native Proficiency" },
-  { name: "Pashto", level: "Native Proficiency" }
+  { name: "Pashto", level: "Native Proficiency" },
+  { name: "English", level: "C2 (Listening/Reading), C1 (Speaking/Writing)" },
+  { name: "Urdu", level: "C2 (Understanding/Speaking), C1 (Writing)" }
 ];
 
 const contact = {
-  phone: "+92 339 0017132",
-  email: "me.hammadkhan.dev@gmail.com",
-  linkedin: "linkedin.com/in/hammadkhan63100",
-  github: "github.com/hammad63100",
+  phone: "+92 345 2477020",
+  email: "s.m.ikhtisham@gmail.com",
+  linkedin: "www.linkedin.com/in/sahibzada-muhammad-ikhtisham-99292628a/",
   location: "Islamabad, Pakistan"
 };
 
@@ -159,12 +162,33 @@ const heroImageUrl =
   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80";
 
 const heroStats = [
-  { value: "6+", label: "Smart contracts" },
-  { value: "3+", label: "REST APIs" },
-  { value: "90%+", label: "Test coverage" }
+  { value: "5+", label: "Websites built" },
+  { value: "6+", label: "Months experience" },
+  { value: "100%", label: "Client satisfaction" }
 ];
 
-const heroTechStack = ["Solidity", "Node.js", "Express", "MongoDB", "Web3"];
+const heroTechStack = ["HTML5", "CSS3", "JavaScript", "WordPress", "React.js"];
+
+const certifications = [
+  {
+    title: "HTML and CSS in depth",
+    provider: "Coursera",
+    date: "Aug 2023",
+    link: "https://coursera.org/verify/X329HFVFHAEC"
+  },
+  {
+    title: "Design, Format, and Presentation in Microsoft PowerPoint",
+    provider: "Coursera",
+    date: "Aug 2023",
+    link: "https://coursera.org/verify/SB692M5BPT4V"
+  },
+  {
+    title: "IELTS Listening and Speaking Sections Skills Mastery",
+    provider: "Coursera",
+    date: "Aug 2023",
+    link: "https://coursera.org/verify/ET5PNY3NYEDX"
+  }
+];
 
 /* ─────────────── ANIMATION VARIANTS ─────────────── */
 
@@ -178,9 +202,8 @@ const fadeInUp: Variants = {
 };
 
 const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
-    opacity: 1,
     transition: { staggerChildren: 0.08 }
   }
 };
@@ -227,9 +250,9 @@ function HeroBackdrop() {
 
 function HeroVisual() {
   const floatingCards = [
-    { icon: Shield, title: "Secure", detail: "Audited flows", className: "-left-3 top-12" },
-    { icon: Database, title: "Backend", detail: "API ready", className: "-right-2 top-1/2" },
-    { icon: Blocks, title: "Web3", detail: "On-chain logic", className: "left-8 -bottom-5" }
+    { icon: Smartphone, title: "Responsive", detail: "Mobile-first", className: "-left-3 top-12" },
+    { icon: Globe, title: "WordPress", detail: "CMS expert", className: "-right-2 top-1/2" },
+    { icon: Brush, title: "UI/UX", detail: "Pixel-perfect", className: "left-8 -bottom-5" }
   ];
 
   return (
@@ -257,9 +280,9 @@ function HeroVisual() {
             <span className="text-xs font-semibold uppercase">deploy.log</span>
           </div>
           <div className="space-y-2 font-mono text-xs text-muted-foreground">
-            <p><span className="text-primary">status</span> contracts verified</p>
-            <p><span className="text-primary">api</span> latency below 500ms</p>
-            <p><span className="text-primary">chain</span> data integrity enabled</p>
+            <p><span className="text-primary">status</span> WordPress build ready</p>
+            <p><span className="text-primary">layout</span> responsive across devices</p>
+            <p><span className="text-primary">seo</span> page structure optimized</p>
           </div>
         </div>
       </motion.figure>
@@ -321,10 +344,10 @@ export default function App() {
       >
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
           <button onClick={() => scrollTo("hero")} className="font-bold text-lg tracking-tight hover:text-primary transition-colors">
-            HK.
+            SMI.
           </button>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            {["About", "Experience", "Projects", "Skills", "Contact"].map((item) => (
+            {["About", "Experience", "Projects", "Skills", "Education", "Contact"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollTo(item.toLowerCase())}
@@ -337,9 +360,6 @@ export default function App() {
           <div className="flex items-center gap-3">
             <a href={`https://${contact.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
               <Linkedin className="w-5 h-5" />
-            </a>
-            <a href={`https://${contact.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-              <Github className="w-5 h-5" />
             </a>
           </div>
         </div>
@@ -371,8 +391,8 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
             >
-              Building secure Web3 systems with
-              <span className="gradient-text"> production-grade backend logic</span>
+              Building modern responsive websites with
+              <span className="gradient-text"> pixel-perfect design</span>
             </motion.h1>
 
             <motion.p
@@ -381,7 +401,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Blockchain Developer | Smart Contract Engineer | Backend Developer
+              Front-End Developer | WordPress Developer | UI/UX Designer
             </motion.p>
 
             <motion.p
@@ -390,7 +410,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              I design Solidity contracts, role-based APIs, and scalable Node.js services that move from prototype to production with clear architecture and strong reliability.
+              I design and develop modern, responsive websites using HTML, CSS, JavaScript, and WordPress. From UI/UX design to fully functional web pages, I deliver reliable web solutions with clean code and strong attention to detail.
             </motion.p>
 
             <motion.div
@@ -406,12 +426,6 @@ export default function App() {
               <Button variant="outline" onClick={() => scrollTo("contact")} className="border-primary/30 hover:bg-primary/10 hover:text-primary">
                 <Mail className="w-4 h-4 mr-2" />
                 Contact Me
-              </Button>
-              <Button variant="ghost" className="text-muted-foreground hover:text-primary" asChild>
-                <a href={`https://${contact.github}`} target="_blank" rel="noopener noreferrer">
-                  <Github className="w-4 h-4 mr-2" />
-                  GitHub
-                </a>
               </Button>
             </motion.div>
 
@@ -469,17 +483,17 @@ export default function App() {
               <Card className="gradient-border hover-lift">
                 <CardContent className="p-6 md:p-8">
                   <p className="text-muted-foreground leading-relaxed text-lg mb-4">
-                    Results-driven <strong className="text-foreground">Blockchain Developer</strong> and <strong className="text-foreground">Backend Developer</strong> with a Bachelor of Science in Software Engineering from Islamia College University, Peshawar (2024).
+                    Dedicated and detail-oriented <strong className="text-foreground">Front-End Developer</strong> and <strong className="text-foreground">WordPress Developer</strong> with practical experience in designing, developing, and maintaining modern, responsive websites.
                   </p>
                   <p className="text-muted-foreground leading-relaxed mb-4">
-                    Delivered <span className="text-primary font-medium">6+ production-grade Solidity smart contracts</span> on Ethereum and Binance Smart Chain covering DeFi, NFT, ERC-20, ERC-721, and escrow use cases. Built <span className="text-primary font-medium">3+ scalable REST APIs</span> using Node.js and Express.js, serving multi-role platforms with thousands of potential users.
+                    Skilled in <span className="text-primary font-medium">HTML, CSS, JavaScript</span>, and WordPress customization, including theme configuration and page-building tools such as Elementor. Demonstrates strong problem-solving abilities, a commitment to high-quality code, and the capacity to deliver reliable web solutions.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    Proficient in the full Web3 development stack including ethers.js, Web3.js, Hardhat, Truffle, Ganache, OpenZeppelin, and MetaMask. Seeking a Blockchain or Backend Developer role to contribute to innovative Web3 projects.
+                    Adaptable, organized, and focused on continuous professional development within the field of web technologies. Seeking a Front-End or WordPress Developer role to contribute to innovative web projects.
                   </p>
 
                   <div className="flex flex-wrap gap-2 mt-6">
-                    {["Immediate Availability", "Open to Remote", "Relocation Possible"].map((tag) => (
+                    {["Immediate Availability", "Relocation Possible"].map((tag) => (
                       <Badge key={tag} variant="secondary" className="bg-primary/10 text-primary border-primary/20">
                         {tag}
                       </Badge>
@@ -604,7 +618,7 @@ export default function App() {
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
           >
-            <SectionTitle icon={Cpu}>Technical Skills</SectionTitle>
+            <SectionTitle icon={Code2}>Technical Skills</SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {skillCategories.map((cat, i) => (
                 <motion.div key={cat.title} custom={i} variants={fadeInUp}>
@@ -629,50 +643,80 @@ export default function App() {
               ))}
             </div>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Education & Languages */}
+      {/* ─── EDUCATION & CERTIFICATIONS ─── */}
+      <section id="education" className="py-24 px-4">
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
           >
-            <motion.div variants={itemFadeIn}>
-              <Card className="gradient-border hover-lift">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <GraduationCap className="w-5 h-5 text-primary" />
-                    <h3 className="font-semibold">Education</h3>
-                  </div>
-                  <p className="font-medium text-foreground">{education.degree}</p>
-                  <p className="text-sm text-muted-foreground mb-1">{education.school}</p>
-                  <p className="text-sm text-muted-foreground mb-3">{education.period}</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    <span className="text-primary font-medium">Coursework:</span> {education.coursework}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <SectionTitle icon={GraduationCap}>Education & Certifications</SectionTitle>
+            <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <motion.div variants={itemFadeIn}>
+                <Card className="gradient-border hover-lift h-full">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <GraduationCap className="w-5 h-5 text-primary" />
+                      <h3 className="font-semibold">Education</h3>
+                    </div>
+                    <p className="font-medium text-foreground">{education.degree}</p>
+                    <p className="text-sm text-muted-foreground mb-1">{education.school}</p>
+                    <p className="text-sm text-muted-foreground mb-3">{education.period}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      <span className="text-primary font-medium">Coursework:</span> {education.coursework}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-            <motion.div variants={itemFadeIn}>
-              <Card className="gradient-border hover-lift">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Languages className="w-5 h-5 text-primary" />
-                    <h3 className="font-semibold">Languages</h3>
-                  </div>
-                  <div className="space-y-3">
-                    {languages.map((lang) => (
-                      <div key={lang.name} className="flex items-center justify-between">
-                        <span className="text-sm font-medium">{lang.name}</span>
-                        <Badge variant="secondary" className="text-xs bg-secondary/60">{lang.level}</Badge>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+              <motion.div variants={itemFadeIn}>
+                <Card className="gradient-border hover-lift h-full">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <BadgeCheck className="w-5 h-5 text-primary" />
+                      <h3 className="font-semibold">Certifications</h3>
+                    </div>
+                    <div className="space-y-3">
+                      {certifications.map((cert) => (
+                        <div key={cert.title} className="flex items-start justify-between gap-2">
+                          <div>
+                            <p className="text-sm font-medium leading-tight">{cert.title}</p>
+                            <p className="text-xs text-muted-foreground">{cert.provider} · {cert.date}</p>
+                          </div>
+                          <a href={cert.link} target="_blank" rel="noopener noreferrer" className="shrink-0 hover:text-primary transition-colors">
+                            <ExternalLink className="w-4 h-4 text-muted-foreground" />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div variants={itemFadeIn}>
+                <Card className="gradient-border hover-lift h-full">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Globe className="w-5 h-5 text-primary" />
+                      <h3 className="font-semibold">Languages</h3>
+                    </div>
+                    <div className="space-y-3">
+                      {languages.map((language) => (
+                        <div key={language.name} className="flex items-start justify-between gap-3">
+                          <span className="text-sm font-medium">{language.name}</span>
+                          <span className="text-right text-xs text-muted-foreground">{language.level}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -692,7 +736,7 @@ export default function App() {
                 <CardContent className="p-8 md:p-12 text-center">
                   <h3 className="text-2xl font-bold mb-3">Let's Build Something Together</h3>
                   <p className="text-muted-foreground max-w-lg mx-auto mb-8">
-                    I'm currently open to new opportunities in Blockchain and Backend Development. Whether you have a project in mind or just want to connect, feel free to reach out.
+                    I'm currently open to new opportunities in Front-End and WordPress Development. Whether you have a project in mind or just want to connect, feel free to reach out.
                   </p>
 
                   <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -706,12 +750,6 @@ export default function App() {
                       <a href={`https://${contact.linkedin}`} target="_blank" rel="noopener noreferrer">
                         <Linkedin className="w-4 h-4 mr-2" />
                         LinkedIn
-                      </a>
-                    </Button>
-                    <Button variant="outline" className="border-primary/30 hover:bg-primary/10 hover:text-primary" asChild>
-                      <a href={`https://${contact.github}`} target="_blank" rel="noopener noreferrer">
-                        <Github className="w-4 h-4 mr-2" />
-                        GitHub
                       </a>
                     </Button>
                   </div>
@@ -742,11 +780,8 @@ export default function App() {
       {/* ─── FOOTER ─── */}
       <footer className="py-8 px-4 border-t border-border/30">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Hammad Khan. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Sahibzada Muhammad Ikhtisham. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <a href={`https://${contact.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-              <Github className="w-5 h-5" />
-            </a>
             <a href={`https://${contact.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
               <Linkedin className="w-5 h-5" />
             </a>

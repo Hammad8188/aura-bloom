@@ -1,35 +1,23 @@
-# Hammad Khan - Portfolio
+# Sahibzada Muhammad Ikhtisham - Portfolio
 
-Personal portfolio website built with Vite, React, TypeScript, Tailwind CSS, and shadcn/ui.
+Personal portfolio website built with Vite, React, TypeScript, Tailwind CSS, and Framer Motion.
 
-## Project info
+## Project Info
 
-- **Tech stack:** Vite + React + TypeScript + Tailwind CSS + shadcn/ui
-- **Author:** Hammad Khan
-- **Description:** Blockchain Developer & Backend Engineer portfolio
+- **Tech stack:** Vite + React + TypeScript + Tailwind CSS
+- **Author:** Sahibzada Muhammad Ikhtisham
+- **Description:** Front-End and WordPress Developer portfolio
 
-## How can I edit this code?
-
-Follow these steps:
+## Local Development
 
 ```sh
-# Step 1: Clone the repository.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install dependencies.
-npm i
-
-# Step 4: Start the dev server.
+npm install
 npm run dev
 ```
 
-## Available scripts
+## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
-- `npm test` - Run tests
