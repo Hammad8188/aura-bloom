@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import {
-  Code2, Globe, Mail, Phone, MapPin, Linkedin, ChevronDown, Monitor, Smartphone, ExternalLink, Layers, Brush, FileText, ShoppingCart, Award, GraduationCap, Sparkles, ArrowRight, BadgeCheck, Terminal
+  Code2, Globe, Mail, Phone, MapPin, Linkedin, ChevronDown, Monitor, Smartphone, ExternalLink, Layers, Brush, FileText, ShoppingCart, Award, GraduationCap, Sparkles, ArrowRight, BadgeCheck, Terminal, Download
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -427,6 +427,12 @@ export default function App() {
                 <Mail className="w-4 h-4 mr-2" />
                 Contact Me
               </Button>
+              <Button variant="outline" className="border-primary/30 hover:bg-primary/10 hover:text-primary" asChild>
+                <a href="/assets/Sahibzada.CV.pdf" download>
+                  <Download className="w-4 h-4 mr-2" />
+                  Download CV
+                </a>
+              </Button>
             </motion.div>
 
             <motion.div
@@ -750,6 +756,12 @@ export default function App() {
                       <a href={`https://${contact.linkedin}`} target="_blank" rel="noopener noreferrer">
                         <Linkedin className="w-4 h-4 mr-2" />
                         LinkedIn
+                      </a>
+                    </Button>
+                    <Button variant="outline" className="border-primary/30 hover:bg-primary/10 hover:text-primary" asChild>
+                      <a href="/assets/Sahibzada.CV.pdf" download>
+                        <Download className="w-4 h-4 mr-2" />
+                        Download CV
                       </a>
                     </Button>
                   </div>
