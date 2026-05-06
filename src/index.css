@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Serif:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,26 +10,26 @@
 
 @layer base {
   :root {
-    --background: 220 20% 4%;
+    --background: 220 20% 10%;
     --foreground: 210 20% 96%;
 
-    --card: 220 18% 8%;
+    --card: 220 18% 14%;
     --card-foreground: 210 20% 96%;
 
     --primary: 174 72% 45%;
     --primary-foreground: 220 20% 4%;
 
-    --secondary: 220 15% 14%;
+    --secondary: 220 15% 20%;
     --secondary-foreground: 210 20% 96%;
 
-    --muted: 220 15% 14%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 220 10% 70%;
 
     --accent: 174 72% 45%;
     --accent-foreground: 220 20% 4%;
 
-    --border: 220 15% 18%;
-    --input: 220 15% 18%;
+    --border: 220 15% 24%;
+    --input: 220 15% 24%;
     --ring: 174 72% 45%;
 
     --radius: 0.5rem;
@@ -49,6 +49,10 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
+  }
+
+  .font-serif {
+    font-family: 'Noto Serif', serif;
   }
 }
 
@@ -206,6 +210,46 @@
   .hero-metric-pill span {
     color: hsl(var(--muted-foreground));
     font-size: 0.78rem;
+  }
+
+  .label-caps {
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .section-border {
+    border-bottom: 1px solid hsl(var(--border) / 0.4);
+  }
+
+  .bento-card {
+    @apply border border-border/50 bg-card/40 p-8 md:p-10 flex flex-col justify-between;
+  }
+
+  .project-visual {
+    @apply relative w-full aspect-[4/3] bg-card border border-border overflow-hidden;
+  }
+
+  .project-visual .project-icon {
+    @apply w-12 h-12 text-primary/30 transition-all duration-700 ease-out;
+  }
+
+  .project-visual:hover .project-icon,
+  .group:hover .project-visual .project-icon {
+    @apply text-primary/80 scale-110;
+  }
+
+  .project-visual::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-60 transition-opacity duration-700;
+  }
+
+  .project-visual:hover::before,
+  .group:hover .project-visual::before {
+    @apply opacity-100;
   }
 }
 
